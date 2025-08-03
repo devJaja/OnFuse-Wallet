@@ -1,17 +1,17 @@
 {
     "manifest_version": 3,
-    "name": "BlockGuard Wallet",
+    "name": "OnFuse Wallet",
     "version": "1.0.0",
     "icons": {
-    "16": "blockguard-icon.png",
-    "32": "blockguard-icon.png",
-    "48": "blockguard-icon.png",
-    "128": "blockguard-icon.png"
+    "16": "logo.png",
+    "32": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
   },
     "action": {
       "default_popup": "index.html", 
       "default_icon": {
-        "32": "blockguard-icon.png"
+        "32": "logo.png"
       }
     },
     "permissions": [

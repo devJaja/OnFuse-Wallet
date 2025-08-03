@@ -101,7 +101,7 @@ export async function sendTransaction(amount, receiver) {
 
     // Create transaction object
     const tx = {
-        to: receiver, // Replace with recipient address
+        to: receiver, // recipient address
         value: ethers.utils.parseEther(amount), // Amount to send
         gasLimit: 21000, // Gas limit for a simple transfer
         gasPrice: await provider.getGasPrice(), // Gas price

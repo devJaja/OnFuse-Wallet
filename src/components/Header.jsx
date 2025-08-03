@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = ({ isLightMode, toggleTheme }) => {
   const location = useLocation();
-  const navigate = useNavigate(); // Use useNavigate to access navigation functionality
+  const navigate = useNavigate(); 
   const [notifications, setNotifications] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [notificationId, setNotificationId] = useState(0);
@@ -49,7 +49,7 @@ const Header = ({ isLightMode, toggleTheme }) => {
     >
       {/* Backward Icon */}
       {location.pathname !== "/" && (
-        <div className="flex bg-[#50C878] p-1 rounded-xl flex-grow-0">
+        <div className="flex bg-[#5865F2] p-1 rounded-xl flex-grow-0">
           {/* Navigate one step back in the history */}
           <button onClick={() => navigate(-1)} className="text-primary-400">
             <IoIosArrowBack className="text-xl font-bold" />
@@ -65,7 +65,7 @@ const Header = ({ isLightMode, toggleTheme }) => {
         {/* Notification Bell with Dropdown */}
         <div className="relative">
           <IoNotifications
-            className="text-[#50C878] h-6 w-6 cursor-pointer"
+            className="text-[#5865F2] h-6 w-6 cursor-pointer"
             onClick={toggleDropdown}
           />
           {/* Dropdown Menu */}
@@ -107,7 +107,7 @@ const Header = ({ isLightMode, toggleTheme }) => {
         <button onClick={toggleTheme} className="h-10 w-10 rounded-lg p-2">
           {!isLightMode ? (
             <svg
-              className="fill-[#50C878] block"
+              className="fill-[#5865F2] block"
               fill="currentColor"
               viewBox="0 0 20 20"
             >

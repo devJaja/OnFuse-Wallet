@@ -4,12 +4,12 @@ import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 
-//Home Imports
+// Home
 import Home from "./pages/Home/Home";
 import Send from "./pages/Home/Send";
 import Receive from "./pages/Home/Receive";
 
-import Welcome from "./pages/Welcome";
+import Landing from "./pages/Landing";
 
 // Profile Imports
 import Profile from "./pages/Profile/Profile";
@@ -19,7 +19,7 @@ import Theme from "./pages/Profile/Theme";
 import SeedPhrase from "./pages/Profile/ShowPhrase";
 import PrivateKey from "./pages/Profile/ViewKey"
 
-//Components Imports
+//Components 
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header";
 
@@ -42,7 +42,7 @@ function AppRoutes({ isLightMode, toggleTheme }) {
   const location = useLocation(); 
 
   // Determine if the Navbar should be displayed
-  const showNavbar = !["/", "/welcome", "/signup", "/create-password", "/secret-recovery", "/recovery-guess"].includes(location.pathname);
+  const showNavbar = !["/", "/Landing", "/signup", "/create-password", "/secret-recovery", "/recovery-guess"].includes(location.pathname);
 
   return (
     <>
@@ -50,7 +50,7 @@ function AppRoutes({ isLightMode, toggleTheme }) {
     <div className={`w-[350px] h-[600px] overflow-hidden ${isLightMode ? "bg-gray-100 text-primary-950" : "bg-primary-950"}`}>
       <Header isLightMode={isLightMode} toggleTheme={toggleTheme} />
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/send-receive" element={<Home />} />
         <Route path="/send-token" element={<Send />} />

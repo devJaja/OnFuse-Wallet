@@ -48,10 +48,8 @@ const ViewKey = () => {
           <span>Copy to clipboard</span>
         </div>
       </div>
-      
-
-            </div>
-        </div>
+      </div>
+    </div>
   )
 }
 

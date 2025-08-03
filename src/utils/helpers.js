@@ -16,22 +16,8 @@ export function replaceRandomMnemonics(arr) {
       }
     }
   
-    return newArray;
-  }
-
-// export function validateMnemonics(originalArray, userFilledArray) {
-//     for (let i = 0; i < originalArray.length; i++) {
-//       if (originalArray[i] !== "" && userFilledArray[i] !== "") {
-//         continue;
-//       }
-  
-//       if (originalArray[i] !== userFilledArray[i]) {
-//         return false;
-//       }
-//     }
-  
-//     return true;
-//   }
+  return newArray;
+}
 
 export function validateMnemonics(originalArray, userFilledArray) {
     for (let i = 0; i < originalArray.length; i++) {

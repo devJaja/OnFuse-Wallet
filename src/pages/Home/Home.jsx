@@ -55,27 +55,6 @@ const Home = () => {
   fetchEthPrice();
  },[])
 
-  // Fetch the balance based on the selected network
-  // useEffect(() => {
-  //   const fetchBalance = async () => {
-  //     try {
-  //       const currentAccount = JSON.parse(localStorage.getItem("userAccounts"))[0];
-        
-  //       const network = selectedNetwork.name.toLowerCase();
-  //       const address = currentAccount.publicAddress;
-  //       console.log(network)
-  //       const balanceHex = await getBalance(network, address);
-  //       console.log(`BH: ${balanceHex/1e18}`)
-  //       const etherBalance = hexToDecimal(balanceHex) / 1e18;
-  //       console.log(`EB: ${etherBalance}`)
-  //       setBalance(etherBalance);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchBalance();
-  // }, [selectedNetwork]);
-
   const hasFetched = useRef(false);
 
   useEffect(() => {
@@ -103,10 +82,6 @@ const Home = () => {
     fetchBalance();
   }, [selectedNetwork]);
   
-
-
-  
-
   // Toggle the dropdown
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

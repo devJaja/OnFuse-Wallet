@@ -1,8 +1,8 @@
 import React from "react";
-import Logo from "../assets/images/blockguard-logo.png";
+import Logo from "../assets/images/onfuse-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
-const Welcome = () => {
+const Landing = () => {
   const navigate = useNavigate();
 
   const handleSignup = () => {
@@ -12,14 +12,14 @@ const Welcome = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="text-center">
-        <div className="flex items-center mt-20">
-          <img src={Logo} alt="blockguard logo" className="w-24 mx-auto" />
+        <div className="flex items-center mt-10">
+          <img src={Logo} alt="Onfuse logo" className="w-32 mx-auto" />
         </div>
         <h1 className="text-xl text-pink-400 font-semibold mt-10">
-          Welcome to blockguard
+          Welcome to Onfuse
         </h1>
         <p className="text-white mt-5 break-words">
-          Sign up and come to the blockguard world
+          Sign up and come to the Onfuse world
         </p>
         <div className="space-y-5 mt-10">
           <button
@@ -39,4 +39,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default Landing;

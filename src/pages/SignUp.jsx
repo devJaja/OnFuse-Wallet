@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from "../assets/images/blockguard-logo.png";
+import Logo from "../assets/images/onfuse-logo.png";
  
 
 const SignUp = () => {
@@ -13,9 +13,6 @@ const SignUp = () => {
 
   const handleCreateWallet = () => {
   if (isChecked) {
-    // Hash the password using CryptoJS
-    // const hashedPassword = CryptoJS.SHA256(password).toString();
-    // console.log('Hashed Password:', hashedPassword);
 
     // Proceed to the next page
     navigate('/create-password'); 
@@ -23,15 +20,6 @@ const SignUp = () => {
     alert('Please agree to the terms first.');
   }
 };
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   try{
-//     const result = await ('https://block-guard-wallet.onrender.com/wallets/create-new-wallet', {
-//       p
-//     })
-//   }
-// }
 
   const handleImportWallet = () => {
     if (isChecked) {
@@ -48,7 +36,7 @@ const SignUp = () => {
         <p className='text-primary-400'>Create Wallet</p>
       </div>
       <div className='space-y-6 flex flex-col items-center mt-8'>
-        <img src={Logo} alt='Blockguard Logo' className='w-24' />
+        <img src={Logo} alt='Onfuse Logo' className='w-24' />
         <div className='flex items-center space-x-2'>
           <input
             type='checkbox'
@@ -56,7 +44,7 @@ const SignUp = () => {
             onChange={handleCheckboxChange}
           />
           <p className='text-primary-400'>
-            I agree to Blockguard's{' '}
+            I agree to Onfuse's{' '}
             <a href='#' target='_blank'>
               <span className='text-blue-500 underline'>Terms of Use</span>
             </a>

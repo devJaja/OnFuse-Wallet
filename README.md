@@ -1,6 +1,6 @@
-# BlockGuard Wallet Extension
+# Onfuse Wallet Extension
 
-**BlockGuard Wallet** is an Ethereum-based browser extension wallet, built using Vite and React. It allows users to manage their Ethereum accounts, send and receive funds, store seed phrases securely, and interact with decentralized applications (dApps).
+**Onfuse Wallet** is an Ethereum-based browser extension wallet, built using Vite and React. It allows users to manage their Ethereum accounts, send and receive funds, store seed phrases securely, and interact with decentralized applications (dApps).
 
 ## Features
 **1. User Authentication:**
@@ -25,8 +25,8 @@ Connect your wallet to decentralized applications for seamless Ethereum transact
 ## Installation
 To get started, clone the repository and install the required dependencies:
 
-git clone https://github.com/your-username/blockguard-wallet.git
-cd blockguard-wallet
+git clone https://github.com/your-username/Onfuse-wallet.git
+cd Onfuse-wallet
 npm install
 Development Server
 To run the app locally with Vite:

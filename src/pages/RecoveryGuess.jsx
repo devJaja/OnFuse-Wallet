@@ -158,14 +158,7 @@ const RecoveryGuess = () => {
               if(!value) return "All field are required"
             }})}
           />
-        {/* {newSeedPhrase.map((phrase, index) => {
-            <span
-              key={index}
-              className={`rounded-lg w-[30%] text-center text-white bg-black py-2 "bg-opacity-50"`}
-            >
-            {phrase}
-            </span>
-        })} */}
+
         </div>
       </div>
       <button

@@ -81,8 +81,8 @@ const CreatePassword = () => {
       <div className="text-center text-primary-400">
         <h1 className="text-xl mb-2">Create Password</h1>
         <p className="text-sm m-5">
-          This password will unlock your Blockguard wallet only on this device.
-          Blockguard cannot recover this password.
+          This password will unlock your Onfuse wallet only on this device.
+          Onfuse cannot recover this password.
         </p>
       </div>
 
@@ -139,7 +139,7 @@ const CreatePassword = () => {
             onChange={handleCheckbox}
           />
           <p className="text-sm text-primary-400 p-6">
-            I understand that Blockguard cannot recover this password for me.{" "}
+            I understand that Onfuse cannot recover this password for me.{" "}
             <span className="text-blue-500 underline">Learn more</span>
           </p>
         </div>

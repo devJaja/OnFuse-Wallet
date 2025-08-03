@@ -43,11 +43,6 @@ const Send = () => {
     setLoading(true);
 
     try {
-      // const txData = {
-      //   to: inputAddress,
-      //   value: ethers.utils.parseEther('0.1'), // Example amount
-      //   gasLimit: 21000,
-      // };
       
       const send = await sendTransaction(inputAmount, inputAddress);
 
@@ -212,28 +207,6 @@ const Send = () => {
       </div>
 
       {/* Row Accounts Section */}
-      {/* <div className="w-72 space-y-2">
-        <h1 className="text-primary-400 text-start ml-2 border-b-2 border-b-primary-600 border-spacing-8">
-          Your Accounts ({accounts.length})
-        </h1>
-        {accounts.map((account, index) => (
-          <div key={index} className="flex items-center py-2 gap-2">
-            <img
-              src={account.profilePicUrl}
-              alt="profile picture"
-              className="w-8 h-8 rounded-full"
-            />
-            <div className="flex flex-col">
-              <h1 className="text-primary-400 font-semibold text-left">
-                {account.name}
-              </h1>
-              <p className="text-primary-400 text-left">
-                {truncateAddress(account.publicAddress)}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div> */}
 
       {loading && (
         <RotatingLines

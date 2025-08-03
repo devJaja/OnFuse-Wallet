@@ -14,9 +14,6 @@ const SecretRecovery = () => {
 
   const mnemonic = location.state?.mnemonic;
 
-  // // Destructure location state to get passphrase and hashedPassword
-  // const { passphrase, hashedPassword } = location.state || {};
-
   // // Handle undefined passphrase case by setting a fallback
   const seedPhrases = mnemonic ? mnemonic.split(" ") : [];
 
