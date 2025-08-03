@@ -40,7 +40,7 @@ const SecretRecovery = () => {
   };
 
   return (
-    <div className="h-[600px] flex flex-col items-center p-4 overflow-auto">
+    <div className="h-[600px] flex flex-col items-center p-2 overflow-auto">
       <h3 className="text-white text-center text-xl mb-4">
         Write down your Secret Recovery Phrase
       </h3>
@@ -52,13 +52,13 @@ const SecretRecovery = () => {
         <li>Store in a safe deposit box</li>
         <li>Write down and store in multiple secret places</li>
       </ul>
-      <div className="h-[30%] mx-auto text-center w-full max-w-[400px] bg-primary-300 rounded-[10px] p-4 overflow-auto">
+      <div className="h-[195px] mx-auto text-center w-full max-w-[400px] bg-primary-300 rounded-[10px] p-1 overflow-hidden">
         {/* Hidden and visible phrases */}
-        <div className="flex flex-wrap justify-between gap-2 mb-4">
+        <div className="flex flex-wrap justify-between gap-2 mt-[1px]">
           {seedPhrases.map((phrase, index) => (
             <span
               key={index}
-              className={`rounded-lg w-[30%] text-center text-white bg-black py-2 ${
+              className={`rounded-lg w-[29%] text-center text-white bg-black py-2 ${
                 showPhrase ? "bg-opacity-50" : "bg-opacity-10"
               }`}
             >
@@ -67,7 +67,7 @@ const SecretRecovery = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-between items-center w-full max-w-[400px] mt-4 mb-2">
+      <div className="flex justify-between items-center w-auto border max-w-[900px] gap-3 mt-4 mb-2">
         <div className="text-white text-sm flex items-center space-x-2">
           {showPhrase ? (
             <IoEyeOutline
@@ -80,7 +80,7 @@ const SecretRecovery = () => {
               className="cursor-pointer text-xl"
             />
           )}
-          <span className="text-sm">Show seed phrase</span>
+          <span className="text-sm bg-slate-700">Show seed phrase</span>
         </div>
         <div
           className="text-pink-500 text-sm flex items-center space-x-1 cursor-pointer"
@@ -94,7 +94,7 @@ const SecretRecovery = () => {
         </div>
       </div>
       <button
-        className="mt-2 text-white rounded-full py-2 w-[250px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
+        className="mt-1 text-white rounded-full py-2 w-[250px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
         onClick={handleSecretGuess}
       >
         Next
