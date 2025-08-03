@@ -24,10 +24,13 @@ const CreatePassword = () => {
   const toggleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
 
-
-  // const handleSubmit = () =>{
-  //   navigate("/secret-recovery")
-  // }
+  const handleImportWallet = () => {
+    if (isChecked) {
+      navigate('/import-wallet'); 
+    } else {
+      alert('Please agree to the terms first.');
+    }
+  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,13 +147,13 @@ const CreatePassword = () => {
           </p>
         </div>
         <button
-          className="bg-[#50C878] text-primary-400 w-[200px] py-2 rounded-full"
+          className="bg-[#5865F2] text-primary-400 w-[200px] py-2 rounded-full"
           onClick={handleSubmit}
         
         >
           Create a new wallet
         </button>
-        <p className="text-gray-500 underline cursor-pointer">
+        <p className="text-gray-500 underline cursor-pointer" onClick={handleImportWallet}>
           I already have an account
         </p>
       </div>
