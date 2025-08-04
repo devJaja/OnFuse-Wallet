@@ -36,13 +36,14 @@ import RecoveryGuess from "./pages/RecoveryGuess";
 import Login from "./components/Login/Login";
 import SignUp from "./pages/SignUp";
 import CreatePassword from "./pages/CreatePassword";
+import ImportWallet from "./pages/ImportWallet";
 
 // Define a separate component for routing
 function AppRoutes({ isLightMode, toggleTheme }) {
   const location = useLocation(); 
 
   // Determine if the Navbar should be displayed
-  const showNavbar = !["/", "/Landing", "/signup", "/create-password", "/secret-recovery", "/recovery-guess"].includes(location.pathname);
+  const showNavbar = !["/", "/Landing", "/signup", "/create-password", "/secret-recovery", "/recovery-guess", "/import-wallet", "/login"].includes(location.pathname);
 
   return (
     <>
@@ -66,6 +67,7 @@ function AppRoutes({ isLightMode, toggleTheme }) {
        
 
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/import-wallet" element={<ImportWallet/>} />
         <Route path="/create-password" element={<CreatePassword />} />
         <Route path="/exchange" element={<Exchange />} />
         <Route path="/statistics" element={<Statistics />} />
