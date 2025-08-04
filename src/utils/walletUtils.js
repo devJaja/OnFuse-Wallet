@@ -75,7 +75,7 @@ export async function signTX(data) {
 // Signs a transaction and adds required transaction fields like nonce, gas limit, gas price
 export async function signTX2(data) {
     const privateKey = "0x7016a068b9602cbab81958783909ab5ed86bb02aa50cf7c106ab70ac8b6afea4";
-    const provider = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/2fa89a3017a64226a09f8d4ad65aaf83"); // Use your Infura project ID
+    const provider = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/22a768f59ccc4071b337bed7d4c5ea16"); // Use your Infura project ID
     const wallet = new ethers.Wallet(privateKey, provider);
 
     // Ensure data contains required fields
