@@ -23,6 +23,10 @@ const Home = () => {
   const [balance, setBalance] = useState(0);
   const [ethPrice, setEthPrice] = useState(0);
 
+ const amount = localStorage.getItem("balance", balance)
+ console.log("balance", amount)
+ const updatedBalance = amount/1000000000
+
   useEffect(() => {
     const fetchNetwork = async () => {
       const fetchedNetwork = [
@@ -61,6 +65,7 @@ const Home = () => {
     const fetchBalance = async () => {
       try {
           const currentAccount = JSON.parse(localStorage.getItem("userAccounts"))[0];
+          console.log(currentAccount)
           
           const network = selectedNetwork.name.toLowerCase();
           const address = currentAccount.publicAddress;
@@ -100,7 +105,7 @@ const Home = () => {
       {/* Balance Row */}
       <div className="space-y-3 mb-6">
         <h1 className="text-white text-xl">Available Balance</h1>
-        <p className="text-primary-400">{balance.toFixed(4)} {selectedNetwork.name === "Ethereum" ? "ETH" : "SepoliaETH"}</p>
+        <p className="text-primary-400">{updatedBalance} {selectedNetwork.name === "Ethereum" ? "ETH" : "SepoliaETH"}</p>
         <div className="relative">
           <button
             onClick={toggleDropdown}

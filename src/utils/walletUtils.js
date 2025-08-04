@@ -47,6 +47,7 @@ export async function getBalance(network, address) {
     try {
       // Fetch the balance in Wei (the smallest unit of Ether)
       const balance = await provider.getBalance(address);
+      localStorage.setItem("balance", balance)
       
       console.log(`Balance in Hex: ${balance._hex}, Network: ${network}, Address: ${address}`);
       
