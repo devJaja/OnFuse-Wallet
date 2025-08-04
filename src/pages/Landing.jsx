@@ -30,7 +30,8 @@ const Landing = () => {
 </p>
 
           <p className="text-white break-words">
-            Sign up and come to the Onfuse world
+            Securely store and manage all your crypto<br />
+             in one place.
           </p>
         </div>
         <div className="space-y-5 justify-center mt-10">
