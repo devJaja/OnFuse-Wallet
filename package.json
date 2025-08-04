@@ -13,6 +13,7 @@
     "@react-icons/all-files": "^4.1.0",
     "axios": "^1.7.7",
     "crypto-js": "^4.2.0",
+    "dotenv": "^17.2.1",
     "ethereum-blockies": "^0.1.1",
     "ethers": "5.7",
     "gravatar-gen": "^1.0.2",
