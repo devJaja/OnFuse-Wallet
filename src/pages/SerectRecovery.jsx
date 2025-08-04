@@ -47,7 +47,7 @@ const SecretRecovery = () => {
         <li>Write down and store in multiple secret places</li>
       </ul>
 
-      <div className="h-[195px] mx-auto text-center w-full max-w-[400px] bg-primary-300 rounded-[10px] p-1 overflow-hidden">
+      <div className="h-[195px] mx-auto text-center w-full max-w-[400px] bg-[#5865F2] rounded-[10px] p-1 overflow-hidden">
         <div className="flex flex-wrap justify-between gap-2 mt-[1px]">
           {seedPhrases.map((phrase, index) => (
             <span
