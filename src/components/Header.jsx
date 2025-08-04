@@ -104,7 +104,7 @@ const Header = ({ isLightMode, toggleTheme }) => {
         </div>
 
         {/* Theme Toggle Button */}
-        <button onClick={toggleTheme} className="h-10 w-10 rounded-lg p-2">
+        {/* <button onClick={toggleTheme} className="h-10 w-10 rounded-lg p-2">
           {!isLightMode ? (
             <svg
               className="fill-[#5865F2] block"
@@ -126,7 +126,7 @@ const Header = ({ isLightMode, toggleTheme }) => {
               ></path>
             </svg>
           )}
-        </button>
+        </button> */}
       </div>
     </div>
   );
