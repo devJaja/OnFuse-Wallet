@@ -1,30 +1,25 @@
 import React, { useState } from "react";
 import { GoCopy } from "react-icons/go";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const SecretRecovery = () => {
-  // State to toggle the visibility of the phrases
   const [showPhrase, setShowPhrase] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(""); 
+  const [copied, setCopied] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
- 
-
   const mnemonic = location.state?.mnemonic;
-
-  // // Handle undefined passphrase case by setting a fallback
   const seedPhrases = mnemonic ? mnemonic.split(" ") : [];
 
-  // Function to copy seed phrases to clipboard
   const handleCopy = () => {
     if (mnemonic) {
       navigator.clipboard
         .writeText(mnemonic)
         .then(() => {
-          setCopySuccess("Copied!");
-          setTimeout(() => setCopySuccess(""), 2000); // Reset success message after 2 seconds
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1000); // Reset after 1s
         })
         .catch((err) => {
           console.error("Failed to copy: ", err);
@@ -36,7 +31,6 @@ const SecretRecovery = () => {
     navigate("/recovery-guess", {
       state: { mnemonic: mnemonic }
     });
-
   };
 
   return (
@@ -52,8 +46,8 @@ const SecretRecovery = () => {
         <li>Store in a safe deposit box</li>
         <li>Write down and store in multiple secret places</li>
       </ul>
+
       <div className="h-[195px] mx-auto text-center w-full max-w-[400px] bg-primary-300 rounded-[10px] p-1 overflow-hidden">
-        {/* Hidden and visible phrases */}
         <div className="flex flex-wrap justify-between gap-2 mt-[1px]">
           {seedPhrases.map((phrase, index) => (
             <span
@@ -67,7 +61,8 @@ const SecretRecovery = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-between items-center w-auto max-w-[900px] gap-3 mt-4 mb-2">
+
+      <div className="flex justify-between items-center w-full max-w-[1100px] gap-3 mt-4 mb-2 p-0">
         <div className="text-white text-sm flex items-center space-x-2">
           {showPhrase ? (
             <IoEyeOutline
@@ -80,21 +75,26 @@ const SecretRecovery = () => {
               className="cursor-pointer text-xl"
             />
           )}
-          <span className="text-sm">Show seed phrase</span>
+          <span className="text-sm whitespace-nowrap">Show seed phrase</span>
         </div>
+
         <div
-          className="text-pink-500 text-sm flex items-center space-x-1 cursor-pointer"
+          className="text-pink-500 text-sm flex items-center space-x-1 cursor-pointer relative"
           onClick={handleCopy}
         >
-          <GoCopy className="text-xl" />
-          <span>Copy to clipboard</span>
-          {copySuccess && (
-            <span className="text-green-500 ml-2">{copySuccess}</span>
+          {copied ? (
+            <IoCheckmarkDoneOutline className="text-green-500 text-xl" />
+          ) : (
+            <GoCopy className="text-xl" />
           )}
+          <span className="whitespace-nowrap">
+            {copied ? "Copied!" : "Copy to clipboard"}
+          </span>
         </div>
       </div>
+
       <button
-        className="mt- text-white rounded-full py-2 w-[250px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
+        className="mt-2 text-white rounded-full py-2 w-[250px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
         onClick={handleSecretGuess}
       >
         Next
