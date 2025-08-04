@@ -17,6 +17,7 @@
     "ethers": "5.7",
     "gravatar-gen": "^1.0.2",
     "ionicons": "^7.4.0",
+    "joi": "^18.0.0",
     "jsqr": "^1.4.0",
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.0.1",

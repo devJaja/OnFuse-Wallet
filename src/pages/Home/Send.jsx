@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Joi from "joi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiOutlineQrcode } from "react-icons/ai";
 import blockies, { render } from "ethereum-blockies";
@@ -40,12 +41,34 @@ const Send = () => {
 
   const handleSend = async () => {
 
+    // Joi validation schema for address and amount
+    const schema = Joi.object({
+      inputAddress: Joi.string()
+        .pattern(/^0x[a-fA-F0-9]{40}$/)
+        .required()
+        .messages({
+          "string.pattern.base": "Invalid Ethereum address.",
+          "string.empty": "Address is required."
+        }),
+      inputAmount: Joi.number()
+        .greater(0)
+        .required()
+        .messages({
+          "number.base": "Amount must be a number.",
+          "number.greater": "Amount must be greater than 0.",
+          "any.required": "Amount is required."
+        })
+    });
+
+    const { error } = schema.validate({ inputAddress, inputAmount: Number(inputAmount) });
+    if (error) {
+      toast.error(error.details[0].message);
+      return;
+    }
+
     setLoading(true);
-
     try {
-      
       const send = await sendTransaction(inputAmount, inputAddress);
-
       if(send){
         toast.success("Transaction sent successfully")
         navigate("/send-receive")
