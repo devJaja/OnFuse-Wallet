@@ -52,13 +52,13 @@ const SecretRecovery = () => {
         <li>Store in a safe deposit box</li>
         <li>Write down and store in multiple secret places</li>
       </ul>
-      <div className="h-[30%] mx-auto text-center w-full max-w-[400px] bg-primary-300 rounded-[10px] p-4 overflow-auto">
+      <div className="h-[33%] mx-auto text-center w-full max-w-[400px] bg-primary-300 rounded-[10px] p-4 overflow-hidden">
         {/* Hidden and visible phrases */}
-        <div className="flex flex-wrap justify-between gap-2 mb-4">
+        <div className="flex flex-wrap justify-center align-center gap-2 mt-[-5.5px]">
           {seedPhrases.map((phrase, index) => (
             <span
               key={index}
-              className={`rounded-lg w-[30%] text-center text-white bg-black py-2 ${
+              className={`rounded-lg w-[30%] text-sm text-center text-white bg-black py-2 ${
                 showPhrase ? "bg-opacity-50" : "bg-opacity-10"
               }`}
             >
@@ -88,13 +88,11 @@ const SecretRecovery = () => {
         >
           <GoCopy className="text-xl" />
           <span>Copy to clipboard</span>
-          {copySuccess && (
-            <span className="text-green-500 ml-2">{copySuccess}</span>
-          )}
+          
         </div>
       </div>
       <button
-        className="mt-2 text-white rounded-full py-2 w-[250px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
+        className="text-white rounded-full py-2 w-[250px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
         onClick={handleSecretGuess}
       >
         Next
