@@ -13,12 +13,20 @@ const ConfirmPhrase = () => {
     e.preventDefault();
     console.log("Input value Submitted", inputValue);
     setInputValue("");
-    handleConfirmPhrase(); // Navigate after submission
+    handleConfirmPhrase();
   };
 
   const handleConfirmPhrase = () => {
-    navigate('/send-receive');
+    navigate("/send-receive");
   };
+
+  // 12 seed phrase inputs
+  const placeholders = [
+    "goat", "float", "ramp",
+    "", "jump", "",
+    "mother", "", "demand",
+    "fuse", "flash", "block"
+  ];
 
   return (
     <div className="mt-8">
@@ -28,86 +36,37 @@ const ConfirmPhrase = () => {
         </h3>
       </div>
 
-      <h2 className="text-[#FF2CDF] mt-20 text-center">
+      <h2 className="text-[#FF2CDF] mt-20 text-center capitalize">
         confirm secret recovery phrase
       </h2>
-      <form onSubmit={handleSubmit} className="h-[236px] mx-auto mt-8 text-center w-[319px] rounded-[10px]  bg-primary-300">
-        <div className="flex justify-between pt-4 mx-4">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            className="rounded-lg w-20 text-center placeholder-black"
-            placeholder="goat"
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center placeholder-black"
-            placeholder="float"
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center placeholder-black"
-            placeholder="ramp"
-          />
+
+      <form
+        onSubmit={handleSubmit}
+        className="h-auto mx-auto mt-8 text-center w-[319px] rounded-[10px] bg-primary-100 pb-10"
+      >
+        <div className="grid grid-cols-3 gap-4 px-4 pt-10">
+          {placeholders.map((placeholder, index) => (
+            <input
+              key={index}
+              type="text"
+              value={index === 0 ? inputValue : undefined}
+              onChange={index === 0 ? handleInputChange : undefined}
+              placeholder={placeholder}
+              className="rounded-lg w-full text-center placeholder-black "
+              aria-label={`Seed word ${index + 1}`}
+            />
+          ))}
         </div>
-        <div className="flex justify-between pt-8 mx-4">
-          <input
-            type="text"
-            className="rounded-lg w-20 text-center"
-            placeholder=""
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center placeholder-black"
-            placeholder="jump"
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center"
-            placeholder=""
-          />
-        </div>
-        <div className="flex justify-between pt-8 mx-4">
-          <input
-            type="text"
-            className="rounded-lg w-20 text-center placeholder-black"
-            placeholder="mother"
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center"
-            placeholder=""
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center placeholder-black"
-            placeholder="demand"
-          />
-        </div>
-        <div className="flex justify-between pt-10 mx-4">
-          <input
-            type="text"
-            className="rounded-lg w-20 text-center placeholder-black"
-            placeholder="fuse"
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center placeholder-black"
-            placeholder="flash"
-          />
-          <input
-            type="text"
-            className="w-20 rounded-lg text-center placeholder-black"
-            placeholder="block"
-          />
-        </div>
-        <button type="submit"
-          className="mt-10 text-white text-lg rounded-3xl px-2 py-1 w-[251px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
-        >
-          Confirm
-        </button>
       </form>
+
+      {/* Button outside the form */}
+      <button
+        type="button"
+        onClick={handleSubmit}
+        className="mt-6 text-white text-lg font-semibold rounded-full px-6 py-3 w-full max-w-[251px] bg-gradient-to-r from-primary-50 to-primary-100 hover:brightness-110 transition duration-300 mx-auto block shadow-lg"
+      >
+        Confirm
+      </button>
     </div>
   );
 };
