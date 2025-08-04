@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { ethers } from 'ethers';
-
+import { useNavigate } from "react-router-dom";
 
 
 const ImportWallet = () => {
   const [mnemonic, setMnemonic] = useState("");
   const [error, setError] = useState("");
   const [walletAddress, setWalletAddress] = useState(null);
+  const navigate = useNavigate();
 
   const handleImport = () => {
     setError(""); 
@@ -32,6 +33,7 @@ const ImportWallet = () => {
       localStorage.setItem("privateKey", wallet.privateKey);
       localStorage.setItem("mnemonic", cleaned);
 
+      navigate('/send-receive');
      
       setWalletAddress(wallet.address);
       console.log("Imported wallet:", wallet.address);
@@ -44,7 +46,7 @@ const ImportWallet = () => {
   return (
     <div className="mt-8">
       <div className="flex gap-1 items-center">
-        <h3 className="text-white text-center text-[18px]">
+        <h3 className="text-white text-center text-[18px] w-full flex items-center justify-center">
           Confirm Secret Recovery Phrase
         </h3>
       </div>
@@ -55,7 +57,7 @@ const ImportWallet = () => {
 
       <form
         onSubmit={handleImport}
-        className="h-auto mx-auto mt-8 text-center w-[319px] rounded-[10px] bg-primary-300 p-4"
+        className="h-auto mx-auto mt-8 text-center w-[319px] rounded-[10px] bg-[#5865F2] p-4"
       >
         <p className="text-sm text-white mb-2">
           Enter your 12-word phrase. Separate each word with a space.
@@ -73,7 +75,7 @@ const ImportWallet = () => {
 
         <button
           type="submit"
-          className="mt-6 text-white text-lg rounded-3xl px-2 py-1 w-[251px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
+          className="mt-6 text-white text-lg rounded-3xl px-2 py-1 w-[251px] bg-gradient-to-r  from-primary-50 to-primary-100 hover:bg-opacity-75"
         >
           Confirm
         </button>
