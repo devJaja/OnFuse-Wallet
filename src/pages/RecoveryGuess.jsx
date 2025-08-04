@@ -56,12 +56,12 @@ const RecoveryGuess = () => {
       <h3 className="text-white text-center text-[18px]">
         Confirm Secret Recovery Phrase
       </h3>
-      <h2 className="text-[#FF2CDF] mt-20 text-center">
+      <h2 className="text-[#fa4f24] mt-20 text-center">
         confirm secret recovery phrase
       </h2>
       <form className="flex flex-wrap justify-between gap-2 pt-4 px-2 mb-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="h-[236px] mx-auto mt-8 text-center w-[319px] rounded-[10px] bg-primary-300">
-        <div className="flex flex-wrap justify-between gap-2 pt-4 px-2 mb-4">
+      <div className="h-[236px] mx-auto mt-8 text-center w-[319px] rounded-[10px] bg-primary-100">
+        <div className="grid grid-cols-3 gap-4 px-4 pt-10">
           <input
             type="text"
             className={`rounded-lg w-20 text-center ${errors["1"] ?"border-red-700": "border-none"}`}
