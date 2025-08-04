@@ -3,6 +3,8 @@ import Logo from "../assets/images/onfuse-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { TypeAnimation } from 'react-type-animation';
+
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -21,11 +23,21 @@ const Landing = () => {
         <div className="flex items-center ">
           <img src={Logo} alt="Onfuse logo" className="w-40 mx-auto" />
         </div>
-          <h2 className="bg-gradient-to-r from-white via-primary-100 py-1  text-xl text-center">
-            Welcome to <span className="text-white">ONFUSE</span>
-      </h2>
+       <div className="py-2 mb-4 bg-gradi">
+          <TypeAnimation
+            sequence={[
+              "Welcome to ONFUSE",
+              2000,
+              "",
+              500,
+            ]}
+            speed={60}
+            repeat={Infinity}
+            className="text-white text-2xl md:text-3xl font-bold"
+          />
+        </div>
         <div className="text-left">
-        <p className="text-2xl font-bold max-w-xl py-3 my-4 break-words bg-gradient-to-r from-white via-primary-100 to-white bg-clip-text text-transparent">
+        <p className="text-2xl font-bold max-w-xl pt-2 my-4 break-words bg-gradient-to-r from-white via-white to-white bg-clip-text text-transparent">
   Most Easiest and Secure <br /> Crypto Wallet
 </p>
 
