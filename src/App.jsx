@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 
@@ -15,7 +15,7 @@ import Landing from "./pages/Landing";
 import Profile from "./pages/Profile/Profile";
 import Currency from "./pages/Profile/Currency";
 import Network from "./pages/Profile/EthNetwork";
-import Theme from "./pages/Profile/Theme";
+import Theme, { ThemeContext } from "./pages/Profile/Theme";
 import SeedPhrase from "./pages/Profile/ShowPhrase";
 import PrivateKey from "./pages/Profile/ViewKey"
 
@@ -39,17 +39,27 @@ import CreatePassword from "./pages/CreatePassword";
 import ImportWallet from "./pages/ImportWallet";
 
 // Define a separate component for routing
-function AppRoutes({ isLightMode, toggleTheme }) {
+function AppRoutes() {
+
+  const { theme, toggleTheme } = useContext(ThemeContext)
+
+    useEffect(()=>{
+  
+  },[theme])
+
   const location = useLocation(); 
 
   // Determine if the Navbar should be displayed
   const showNavbar = !["/", "/Landing", "/signup", "/create-password", "/secret-recovery", "/recovery-guess", "/import-wallet", "/login"].includes(location.pathname);
 
+   const showHeader = !["/", "/Landing", "/signup", "/create-password", "/secret-recovery", "/recovery-guess", "/import-wallet", "/login"].includes(location.pathname);
+
   return (
     <>
     <ToastContainer />
-    <div className={`w-[350px] h-[600px] overflow-hidden ${isLightMode ? "bg-gray-100 text-primary-950" : "bg-primary-950"}`}>
-      <Header isLightMode={isLightMode} toggleTheme={toggleTheme} />
+    <div className={`w-[350px] min-h-screen overflow-hidden`}>
+
+      {showHeader && <Header />  }
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />

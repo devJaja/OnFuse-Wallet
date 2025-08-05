@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { IoNotifications } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate, useLocation } from "react-router-dom";
+import ThemeBtn from "./themeBtn/ThemeBtn";
 
-const Header = ({ isLightMode, toggleTheme }) => {
+const Header = () => {
   const location = useLocation();
   const navigate = useNavigate(); 
   const [notifications, setNotifications] = useState([]);
@@ -43,9 +44,7 @@ const Header = ({ isLightMode, toggleTheme }) => {
 
   return (
     <div
-      className={`flex items-center ${
-        isLightMode ? "bg-gray-100" : "bg-primary-950"
-      } px-7 py-2`}
+      className={`flex items-center px-7 py-2`}
     >
       {/* Backward Icon */}
       {location.pathname !== "/" && (
@@ -102,7 +101,9 @@ const Header = ({ isLightMode, toggleTheme }) => {
             </div>
           )}
         </div>
-
+          <div>
+            <ThemeBtn />
+          </div>
         {/* Theme Toggle Button */}
         {/* <button onClick={toggleTheme} className="h-10 w-10 rounded-lg p-2">
           {!isLightMode ? (

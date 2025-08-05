@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiOutlineQrcode } from "react-icons/ai";
 import blockies, { render } from "ethereum-blockies";
@@ -8,16 +8,20 @@ import { ethers } from "ethers";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RotatingLines } from 'react-loader-spinner'
+import { ThemeContext } from "../Profile/Theme";
+
 
 
 const Send = () => {
   const [loading, setLoading] = useState(false);
   const [inputAddress, setInputAddress] = useState("");
-  const [ inputAmount, setInputAmount ] = useState("");
+  const [inputAmount, setInputAmount] = useState("");
   const [file, setFile] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { theme } = useContext(ThemeContext)
+
 
   const navigate = useNavigate();
 
@@ -43,13 +47,13 @@ const Send = () => {
     setLoading(true);
 
     try {
-      
+
       const send = await sendTransaction(inputAmount, inputAddress);
 
-      if(send){
+      if (send) {
         toast.success("Transaction sent successfully")
         navigate("/send-receive")
-      }else{
+      } else {
         toast.error("An error occcurred")
       }
       console.log("Transaction sent successfully");
@@ -114,9 +118,9 @@ const Send = () => {
     <div className="flex flex-col items-center text-center mt-5 space-y-8">
       {/* Row From Section */}
       <div className="space-y-2 w-72">
-        <h1 className="text-primary-400 text-start ml-6">From</h1>
+        <h1 className="text-start ml-6">From</h1>
         <button
-          className="flex items-center rounded-full border-2 text-primary-400 text-sm w-full h-12 px-3"
+          className="flex items-center rounded-full border-2 text-sm w-full h-12 px-3"
           onClick={toggleDropdown}
         >
           <div className="flex items-center space-x-2">
@@ -167,13 +171,13 @@ const Send = () => {
 
       {/* Row Amount Section */}
       <div className="space-y-1 w-72">
-        <h1 className="text-primary-400 text-start ml-6">Amount</h1>
+        <h1 className="text-start ml-6">Amount</h1>
         <div className="relative flex items-center">
           <input
             type="number"
             value={inputAmount}
             onChange={(e) => setInputAmount(e.target.value)}
-            className="border-2 border-gray-300 bg-transparent rounded-full text-primary-400 text-sm p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border-2 border-gray-300 bg-transparent rounded-full text-sm p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Input amount"
           />
         </div>
@@ -181,13 +185,13 @@ const Send = () => {
 
       {/* Row To Account Section */}
       <div className="space-y-1 w-72">
-        <h1 className="text-primary-400 text-start ml-6">To</h1>
+        <h1 className="text-start ml-6">To</h1>
         <div className="relative flex items-center">
           <input
             type="text"
             value={inputAddress}
             onChange={(e) => setInputAddress(e.target.value)}
-            className="border-2 border-gray-300 bg-transparent rounded-full text-primary-400 text-sm p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border-2 border-gray-300 bg-transparent rounded-full text-sm p-3 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter public address or ENS name"
           />
           <label
@@ -223,12 +227,12 @@ const Send = () => {
       )}
 
       {/* Row Send and Cancel Button Section */}
-      <div className="space-x-6 space-y-9">
-        <button className="w-32 border-2 border-primary-300 rounded-full p-1 text-primary-400 hover:bg-slate-200 hover:text-primary-50">
+      <div className="w-full gap-4 px-6 flex flex-col-reverse items-center justify-center ">
+        <button className={`hover:bg-slate-200 hover:text-primary-50" ${theme === "light" ? "border border-primary-300 text-primary-300" : "border border-primary-300 text-white"} w-full py-2 rounded-full`} >
           Cancel
         </button>
         <button
-          className="w-32 bg-gradient-to-r from-primary-50 via-primary-200 to-primary-300 rounded-full p-1 text-primary-400 hover:opacity-70"
+          className='bg-gradient-to-r from-primary-50 via-primary-200 to-primary-300 w-full mx-3 py-3 rounded-full border border-white'
           onClick={handleSend}
           disabled={loading}
         >

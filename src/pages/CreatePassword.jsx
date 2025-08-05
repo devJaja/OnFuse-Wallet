@@ -3,6 +3,8 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
 import blockies from "ethereum-blockies";
 import { generateMnemonic, createHdWallet } from "../utils/walletUtils";
+import ThemeBtn from "../components/themeBtn/ThemeBtn";
+import { toast } from "react-toastify";
 
 const CreatePassword = () => {
   const [password, setPassword] = useState(""); 
@@ -37,12 +39,12 @@ const CreatePassword = () => {
   
   
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      toast("Passwords do not match");
       return;
     }
   
     if (!isChecked) {
-      setErrorMessage("Please agree to the terms first.");
+      toast("Please agree to the terms first.");
       return;
     }
   
@@ -79,9 +81,12 @@ const CreatePassword = () => {
   
 
   return (
-    <div className="flex flex-col items-center mt-5">
+    <div className="flex flex-col items-center py-8">
+      <div className="w-full flex justify-end px-4 items-end">
+        <ThemeBtn />
+      </div>
       {/* Row One */}
-      <div className="text-center text-primary-400">
+      <div className="text-center ">
         <h1 className="text-xl mb-2">Create Password</h1>
         <p className="text-sm m-5">
           This password will unlock your Onfuse wallet only on this device.
@@ -96,7 +101,7 @@ const CreatePassword = () => {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)} // Update password state
-            className="border-2 border-gray-300 bg-transparent rounded-full px-4 text-primary-400 text-sm p-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border-2 border-gray-300 bg-transparent rounded-full px-4  text-sm p-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="New Password (8 characters min)"
           />
           <div
@@ -116,7 +121,7 @@ const CreatePassword = () => {
             type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)} // Update confirm password state
-            className="border-2 border-gray-300 bg-transparent rounded-full text-primary-400 px-4 text-sm p-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border-2 border-gray-300 bg-transparent rounded-full  px-4 text-sm p-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Confirm Password"
           />
           <div
@@ -141,19 +146,19 @@ const CreatePassword = () => {
             className="w-5 h-5 ml-5"
             onChange={handleCheckbox}
           />
-          <p className="text-sm text-primary-400 p-6">
+          <p className="text-sm  p-6">
             I understand that Onfuse cannot recover this password for me.{" "}
-            <span className="text-blue-500 underline">Learn more</span>
+            <span className="text-purple-500 underline">Learn more</span>
           </p>
         </div>
         <button
-          className="bg-[#5865F2] text-primary-400 w-[200px] py-2 rounded-full"
+          className="bg-[#5865F2] bg-gradient-to-r from-primary-50 via-primary-200 to-primary-300 text-primary-400 w-[250px] py-2 rounded-full border border-white"
           onClick={handleSubmit}
         
         >
           Create a new wallet
         </button>
-        <p className="text-gray-500 underline cursor-pointer" onClick={handleImportWallet}>
+        <p className="text-gray-500 text-[12px] underline cursor-pointer" onClick={handleImportWallet}>
           I already have an account
         </p>
       </div>

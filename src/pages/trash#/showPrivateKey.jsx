@@ -2,20 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { GoCopy } from 'react-icons/go';
 
-const ShowPhrase = () => {
-    const [showPhrase, setShowPhrase] = useState(false);
-    const [seedPhrases, setSeedPhrases] = useState([])
+const ShowPrivateKey = () => {
+    const [showkey, setShowkey] = useState(false);
+    const storedKey = localStorage.getItem('privateKey');
+    console.log(storedKey)
 
     // Destructure location state to get passphrase and hashedPassword
-  const { passphrase, hashedPassword } = location.state || {}; 
+  const { key, hashedKey } = location.state || {}; 
 
      // Handle undefined passphrase case by setting a fallback
 
   useEffect(()=>{
-    const storedPassphrase = localStorage.getItem('mnemonic');
-    if (storedPassphrase){
-      setSeedPhrases(storedPassphrase.split(" "));
-    }
+    
   }, []);
   return (
     <div>
@@ -24,32 +22,25 @@ const ShowPhrase = () => {
             <div className='w-[300px] h-[300px] mx-6 rounded-xl bg-slate-500 p-4'>
                  {/* Hidden and visible phrases */}
         <div className="flex flex-wrap justify-between gap-2 mb-4">
-          {seedPhrases.map((phrase, index) => (
-            <input
-              key={index}
-              type={showPhrase ? "text" : "password"}
-              className="rounded-lg w-[30%] text-center placeholder-black"
-              placeholder={showPhrase ? phrase : "****"}
-            />
-          ))}
+            {storedKey}
         </div>
       </div>
       <div className="flex justify-between items-center gap-3 w-[300px] p-2 ml-4 mt-4 mb-4">
         <div className="text-white text-sm flex items-center space-x-2">
-          {showPhrase ? (
+          {showkey ? (
             <IoEyeOutline
-              onClick={() => setShowPhrase(false)}
+              onClick={() => setShowkey(false)}
               className="cursor-pointer text-xl"
             />
           ) : (
             <IoEyeOffOutline
-              onClick={() => setShowPhrase(true)}
+              onClick={() => setShowkey(true)}
               className="cursor-pointer text-xl"
             />
           )}
-          <span className="text-sm">Show seed phrase</span>
+          <span className="text-sm">Show Private Key phrase</span>
         </div>
-        <div className="text-pink-500 text-sm flex items-center space-x-1">
+        <div className="text-purple-700 text-sm flex justify-center border border-red-700 items-center space-x-1">
           <GoCopy />
           <span>Copy to clipboard</span>
         </div>
@@ -59,4 +50,4 @@ const ShowPhrase = () => {
   )
 }
 
-export default ShowPhrase
+export default ShowPrivateKey

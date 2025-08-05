@@ -47,37 +47,41 @@ const Receive = () => {
   return (
     <div className="flex flex-col items-center text-center mt-5 space-y-10">
       <div className="text-center space-y-5">
-        <h1 className="text-primary-400 text-xl font-normal">Receive</h1>
+        <h1 className=" text-xl font-normal">Receive</h1>
 
         {/* Display QR Code */}
         <div className="space-y-5">
           {qrCodeURL && (
-            <img src={qrCodeURL} alt="QR Code" className="mx-auto" />
+            <img src={qrCodeURL} alt="QR Code" className="mx-auto border" />
           )}
-          <p className="text-primary-400">Scan address to receive payment</p>
+          <p className="">Scan address to receive payment</p>
         </div>
 
-        <div className="relative flex items-center">
+        <div className="flex flex-col items-center">
           <input
             type="text"
-            value={truncateAddress(publicAddress)}
+            value={publicAddress}
             readOnly
-            className="border-2 border-gray-300 bg-transparent rounded-full text-primary-400 text-sm py-2 w-60 pl-4 pr-24 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border-2 border-gray-300 bg-transparent rounded-full  text-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 truncate"
           />
-          <button
-            className={`absolute right-12 border-2 text-sm px-2 rounded-full ${
-              isCopied
-                ? "text-primary-500 border-primary-500"
-                : "text-primary-400 border-primary-400"
-            }`}
+        </div>
+        <div className="flex gap-3 justify-center items-center">
+           <button
+            className={`border-2 text-sm p-2 w-[80px] rounded-full`}
             onClick={handleCopy}
           >
-            {isCopied ? "Copied" : "Copy"}
+            Copy
           </button>
-          <IoShareOutline
-            className="absolute right-3 text-primary-400 cursor-pointer"
+          <button
+            className={`border-2 text-sm p-2 w-[80px] rounded-full`}
             onClick={toggleShareModal}
-          />
+          >
+            Share
+          </button>
+          {/* <IoShareOutline
+            className="cursor-pointer"
+            onClick={toggleShareModal}
+          /> */}
         </div>
 
         {/* Share Modal */}

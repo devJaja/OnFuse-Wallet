@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { BsSendFill } from "react-icons/bs";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { getBalance, hexToDecimal } from "../../utils/walletUtils";
 import axios from "axios";
 import { ethers } from "ethers";
+import { ThemeContext } from "../Profile/Theme";
 
 const networkColors = {
   Ethereum: "#627EEA", 
@@ -16,12 +17,22 @@ const networkColors = {
 
 // Home Component
 const Home = () => {
+    const { theme } = useContext(ThemeContext)
+  
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState({ name: "Ethereum", color: networkColors["Ethereum"] });
   const [networks, setNetworks] = useState([]);
   const [balance, setBalance] = useState(0);
   const [ethPrice, setEthPrice] = useState(0);
+  let balLocal = localStorage.getItem("balance")
+  balLocal = JSON.parse(balLocal)
+
+  console.log(balLocal, typeof(balLocal))
+
+  const ethBal = ethers.utils.formatEther(String(balLocal));
+
+  console.log(ethBal)
 
   useEffect(() => {
     const fetchNetwork = async () => {
@@ -93,18 +104,18 @@ const Home = () => {
     setIsDropdownOpen(false);
   };
 
-  const dollarEquivalent = (balance * ethPrice).toFixed(2)
+  const dollarEquivalent = (ethBal * ethPrice).toFixed(2)
 
   return (
     <div className="flex flex-col items-center text-center mt-2 space-y-5">
       {/* Balance Row */}
       <div className="space-y-3 mb-6">
-        <h1 className="text-white text-xl">Available Balance</h1>
-        <p className="text-primary-400">{balance.toFixed(4)} {selectedNetwork.name === "Ethereum" ? "ETH" : "SepoliaETH"}</p>
+        <h1 className=" text-xl">Available Balance</h1>
+        <p className="">{ethBal} {selectedNetwork.name === "Ethereum" ? "ETH" : "SepoliaETH"}</p>
         <div className="relative">
           <button
             onClick={toggleDropdown}
-            className="flex items-center justify-center space-x-4 rounded-full bg-purple-400 text-white w-40 py-1"
+            className="flex items-center justify-center space-x-4 rounded-full border border-primary-300 bg-white text-purple-700  w-40 py-1"
           >
             <FaRegCircleDot className="mr-2" style={{ color: selectedNetwork.color }} />
             <span>{selectedNetwork.name}</span>
@@ -137,7 +148,7 @@ const Home = () => {
           >
             <BsSendFill size={20} className="text-primary-50" />
           </button>
-          <span className="mt-1 text-white">Send</span>
+          <span className="mt-1 ">Send</span>
         </div>
         <div className="flex flex-col items-center">
           <button
@@ -146,30 +157,31 @@ const Home = () => {
           >
             <MdCallReceived size={20} className="text-primary-50" />
           </button>
-          <span className="mt-1 text-white">Receive</span>
+          <span className="mt-1 ">Receive</span>
         </div>
       </div>
 
       {/* Tokens Row */}
       <div>
         <div className="flex px-4">
-          <h2 className="text-primary-400">Tokens</h2>
+          <h2 className="my-4">Tokens</h2>
         </div>
-        <div className="bg-[#373073] w-[350px] h-screen rounded-2xl">
+        <div className={`rounded-3xl  w-[350px] h-screen  mx-auto my-4 text-center p-2 ${theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"
+          }`}>
           <div className="flex items-center justify-between px-4">
             <div className="flex items-center py-2 gap-2">
               <span className="border-2 border-primary-900 rounded-full p-1">
                 <FaEthereum />
               </span>
               <div className="flex flex-col items-start">
-                <h1 className="text-primary-400 font-semibold">ETH</h1>
-                <p className="text-primary-400">Ethereum</p>
+                <h1 className="font-semibold">ETH</h1>
+                <p className="">Ethereum</p>
               </div>
             </div>
             <div>
               <div className="flex flex-col items-start">
-                <h1 className="text-primary-400 font-semibold">{balance.toFixed(4)} ETH</h1>
-                <p className="text-primary-400">${dollarEquivalent}</p>
+                <h1 className="font-semibold">{ethBal} ETH</h1>
+                <p className="">${dollarEquivalent}</p>
               </div>
             </div>
           </div>
