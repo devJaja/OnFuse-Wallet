@@ -1,53 +1,35 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { GoCopy } from 'react-icons/go';
+import { ThemeContext } from './Theme';
 
 const ViewKey = () => {
-    const [showPhrase, setShowPhrase] = useState(false);
+  const { theme } = useContext(ThemeContext)
+  const [showkey, setShowkey] = useState(false);
+  const storedKey = localStorage.getItem('privateKey');
+  console.log(storedKey)
 
-    // Destructure location state to get passphrase and hashedPassword
-  const { passphrase, hashedPassword } = location.state || {}; 
-
-     // Handle undefined passphrase case by setting a fallback
-  const seedPhrases = passphrase ? passphrase.split(" ") : [];
+  // Destructure location state to get passphrase and hashedPassword
+  const { key, hashedKey } = location.state || {};
   return (
-    <div>
-        <div className='space-y-5 mt-4'>
-          <h1 className='text-primary-400 text-center font-semibold'>Private Key</h1>
-            <h2 className='mx-6 p-2 text-primary-400'>These words are the keys to your wallet</h2>
-            <div className='w-[300px] h-[200px] mx-6 rounded-xl bg-slate-500 p-4'>
-                 {/* Hidden and visible phrases */}
-        <div className="flex flex-wrap justify-between gap-2 mb-4">
-          {seedPhrases.map((phrase, index) => (
-            <input
-              key={index}
-              type={showPhrase ? "text" : "password"}
-              className="rounded-lg w-[30%] text-center placeholder-black"
-              placeholder={showPhrase ? phrase : "****"}
-            />
-          ))}
+    <div className=''>
+      <div className='space-y-5 mt-4 flex flex-col justify-center'>
+        <h1 className=' text-center font-semibold'>Private Key</h1>
+        <h2 className='mx-6 p-2 '>These words are the keys to your wallet</h2>
+        <div className={`rounded-3xl  mx-auto my-4 text-center w-[319px] h-[300px] p-2 ${theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"
+          }`}>
+          {/* Hidden and visible phrases */}
+          <div className="w-full overflow-auto break-words rounded-md text-xl p-3">
+            {storedKey}
+          </div>
         </div>
-      </div>
-      <div className="flex justify-between items-center gap-3 w-[300px] p-2 ml-4 mt-4 mb-4">
-        <div className="text-white text-sm flex items-center space-x-2">
-          {showPhrase ? (
-            <IoEyeOutline
-              onClick={() => setShowPhrase(false)}
-              className="cursor-pointer text-xl"
-            />
-          ) : (
-            <IoEyeOffOutline
-              onClick={() => setShowPhrase(true)}
-              className="cursor-pointer text-xl"
-            />
-          )}
-          <span className="text-sm">Show Private Key</span>
+        <div className="flex items-center gap-3 w-[300px] justify-center p-2 ml-4 mt-4 mb-4">
+
+          <div className="text-purple-700 text-sm flex justify-center items-center space-x-1">
+            <GoCopy />
+            <span>Copy to clipboard</span>
+          </div>
         </div>
-        <div className="text-pink-500 text-sm flex items-center space-x-1">
-          <GoCopy />
-          <span>Copy to clipboard</span>
-        </div>
-      </div>
       </div>
     </div>
   )

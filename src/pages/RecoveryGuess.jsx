@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { replaceRandomMnemonics, validateMnemonics } from "../utils/helpers";
 import { toast } from "react-toastify";
+import ThemeBtn from "../components/themeBtn/ThemeBtn";
+import { ThemeContext } from "./Profile/Theme";
 
 const RecoveryGuess = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme } = useContext(ThemeContext)
+
 
   const { register, handleSubmit, formState, setValue } = useForm();
   const { errors } = formState;
@@ -35,45 +39,59 @@ const RecoveryGuess = () => {
   };
 
   return (
-    <div className="mt-3">
-      <h2 className="mt-20 text-center text-[#f0eae9] dark:text-red-600 text-xl font-semibold">
-  confirm secret recovery phrase
-</h2>
+    <div className="h-[600px] flex flex-col items-center py-8  overflow-auto">
+      <div className="w-full flex justify-end px-4 items-end mb-4 ">
+        <ThemeBtn />
+      </div>
 
-      <form
-        className="flex flex-wrap justify-between gap-2 pt-4 px-2 mb-4"
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <div className="h-[236px] mx-auto mt-8 text-center w-[319px] rounded-[10px] bg-primary-100">
-          <div className="grid grid-cols-3 gap-4 px-4 pt-10">
-            {[...Array(12)].map((_, index) => {
-              const fieldName = (index + 1).toString();
-              return (
-                <input
-                  key={fieldName}
-                  type="text"
-                  className={`rounded-lg w-20 text-center ${
-                    errors[fieldName] ? "border border-red-700" : "border-none"
-                  }`}
-                  placeholder=""
-                  {...register(fieldName, {
-                    validate: (value) => !!value || "This field is required",
-                  })}
-                />
-              );
-            })}
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="mt-6 ml-11 text-white text-lg rounded-3xl px-2 py-1 w-[251px] bg-gradient-to-r from-primary-50 to-primary-100 hover:bg-opacity-75"
+      <h3 className="text-center text-lg mb-4">
+        Write down your Secret Recovery Phrase
+      </h3>
+      <div className={` ${theme === "light" ? " text-primary-300" : " text-white"} text-[13px] rounded-full`}>
+        <h2 >
+          confirm secret recovery phrase
+        </h2>
+      </div>
+      <div className=" mx-auto text-center w-full max-w-[400px] rounded-[10px] p-4 overflow-auto">
+        {/* Hidden and visible phrases */}
+        <form
+          className="flex flex-wrap justify-center  gap-2 pt-4 px-2 mb-4"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
         >
-          Next
-        </button>
-      </form>
+          <div>
+            <div className={`rounded-3xl  mx-auto my-4 text-center w-[319px] p-2 ${theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"
+          }`}>
+              <div className="grid grid-cols-3 gap-4 px-4 py-6">
+                {[...Array(12)].map((_, index) => {
+                  const fieldName = (index + 1).toString();
+                  return (
+                    <input
+                      key={fieldName}
+                      type="text"
+                      className={`rounded-lg p-1 w-20 text-black border-gray-500 text-center ${errors[fieldName] ? "border border-red-700" : "border-none"
+                        }`}
+                      placeholder=""
+                      {...register(fieldName, {
+                        validate: (value) => !!value || "This field is required",
+                      })}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="bg-[#5865F2] bg-gradient-to-r from-primary-50 via-primary-200 to-primary-300 text-primary-400 w-[250px] py-2 rounded-full border border-white"
+          >
+            Next
+          </button>
+        </form>
+      </div>
     </div>
+
   );
 };
 

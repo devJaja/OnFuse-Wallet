@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiCurrencyDollar } from "react-icons/hi";
 import { BsGlobeEuropeAfrica } from "react-icons/bs";
 import { MdOutlineStickyNote2, MdKey, MdOutlineNavigateNext } from "react-icons/md";
 import { CgDarkMode } from "react-icons/cg";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { ThemeContext } from "./Theme";
 
 const Profile = () => {
+
+  const { theme } = useContext(ThemeContext)
+
+
   const navigate = useNavigate();
 
   const handleViewKey = () => {
@@ -27,24 +32,24 @@ const Profile = () => {
   return (
     <div className="flex flex-col gap-5">
       {/* Card One */}
-      <div className="w-[300px] h-[200px] mx-6 rounded-xl bg-slate-500 p-4">
-        <h1 className="text-white">Preference</h1>
+      <div className={`w-[300px] h-[200px] mx-6 rounded-xl bg-slate-500 p-4 ${theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"}`}>
+        <h1 className="">Preference</h1>
         <div className="flex flex-col">
-          <button className="flex items-center justify-between w-full h-12 px-1 text-primary-400 text-sm" onClick={handleCurrency}>
+          <button className="flex items-center justify-between w-full h-12 px-1 text-sm" onClick={handleCurrency}>
             <div className="flex items-center gap-2">
               <HiCurrencyDollar className="text-xl" />
               Currency
             </div>
             <MdOutlineNavigateNext className="text-xl" />
           </button>
-          <button className="flex items-center justify-between w-full h-12 px-1 text-primary-400 text-sm" onClick={handleNetwork}>
+          <button className="flex items-center justify-between w-full h-12 px-1 text-sm" onClick={handleNetwork}>
             <div className="flex items-center gap-2">
               <BsGlobeEuropeAfrica className="text-xl" />
               Network
             </div>
             <MdOutlineNavigateNext className="text-xl" />
           </button>
-          <button className="flex items-center justify-between w-full h-12 px-1 text-primary-400 text-sm" onClick={handleTheme}>
+          <button className="flex items-center justify-between w-full h-12 px-1 text-sm" onClick={handleTheme}>
             <div className="flex items-center gap-2">
               <CgDarkMode className="text-xl" />
               Theme
@@ -54,17 +59,17 @@ const Profile = () => {
         </div>
       </div>
       {/* Card two */}
-      <div className="w-[300px] h-[200px] mx-6 rounded-xl bg-slate-500 p-4">
-        <h1 className="text-white">Security</h1>
+      <div className={`w-[300px] h-[200px] mx-6 rounded-xl bg-slate-500 p-4 ${theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"}`}>
+        <h1 className="">Security</h1>
         <div className="flex flex-col gap-2">
-          <button className="flex items-center justify-between w-full h-12 px-1 text-primary-400 text-sm" onClick={handleShowPhrase}>
+          <button className="flex items-center justify-between w-full h-12 px-1 text-sm" onClick={handleShowPhrase}>
             <div className="flex items-center gap-2">
               <MdOutlineStickyNote2 className="text-xl" />
               Show Recovery Phrase
             </div>
             <MdOutlineNavigateNext className="text-xl" />
           </button>
-          <button className="flex items-center justify-between w-full h-12 px-1 text-primary-400 text-sm" onClick={handleViewKey}>
+          <button className="flex items-center justify-between w-full h-12 px-1 text-sm" onClick={handleViewKey}>
             <div className="flex items-center gap-2">
               <MdKey className="text-xl" />
               View Private Key

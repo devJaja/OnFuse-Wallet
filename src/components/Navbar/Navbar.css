@@ -1,3 +1,4 @@
+
 .navigation {
     position: fixed;
     bottom: 0;
@@ -74,6 +75,7 @@
     height: 45px;
     background: #4f79ee;
     border-radius: 50%;
+    border: 3px solid #fff;
     transform: translateY(-38px) scale(0);
 }
 
