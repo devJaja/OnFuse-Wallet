@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import QRCode from "qrcode";
-import { IoShareOutline } from "react-icons/io5";
 import { FaWhatsapp, FaTelegramPlane } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -78,10 +77,6 @@ const Receive = () => {
           >
             Share
           </button>
-          {/* <IoShareOutline
-            className="cursor-pointer"
-            onClick={toggleShareModal}
-          /> */}
         </div>
 
         {/* Share Modal */}

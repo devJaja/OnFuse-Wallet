@@ -5,34 +5,24 @@ import { BsSendFill } from "react-icons/bs";
 import { MdCallReceived } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { getBalance, hexToDecimal } from "../../utils/walletUtils";
+import { getBalance } from "../../utils/walletUtils";
 import axios from "axios";
 import { ethers } from "ethers";
 import { ThemeContext } from "../Profile/Theme";
 
 const networkColors = {
-  Ethereum: "#627EEA", 
-  Sepolia: "#F7931A",  
+  Ethereum: "#627EEA",
+  Sepolia: "#F7931A",
 };
 
-// Home Component
 const Home = () => {
-    const { theme } = useContext(ThemeContext)
-  
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState({ name: "Ethereum", color: networkColors["Ethereum"] });
   const [networks, setNetworks] = useState([]);
   const [balance, setBalance] = useState(0);
   const [ethPrice, setEthPrice] = useState(0);
-  let balLocal = localStorage.getItem("balance")
-  balLocal = JSON.parse(balLocal)
-
-  console.log(balLocal, typeof(balLocal))
-
-  const ethBal = ethers.utils.formatEther(String(balLocal));
-
-  console.log(ethBal)
 
   useEffect(() => {
     const fetchNetwork = async () => {
@@ -40,7 +30,6 @@ const Home = () => {
         { name: "Ethereum" },
         { name: "Sepolia" },
       ];
-
       const networksWithColors = fetchedNetwork.map(network => ({
         ...network,
         color: networkColors[network.name] || "#000",
@@ -51,71 +40,62 @@ const Home = () => {
     fetchNetwork();
   }, []);
 
- // Fetch ETH price in USD from CoinGecko
- const fetchEthPrice = async () => {
-  try {
-    const response = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
-    const price = response.data.ethereum.usd;
-    setEthPrice(price);
-  }catch (error){
-    console.error(error)
-  }
- };
+  // Fetch ETH price in USD
+  const fetchEthPrice = async () => {
+    try {
+      const response = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
+      const price = response.data.ethereum.usd;
+      setEthPrice(price);
+    } catch (error) {
+      console.error("Error fetching ETH price:", error);
+    }
+  };
 
- useEffect (()=>{
-  fetchEthPrice();
- },[])
-
-  const hasFetched = useRef(false);
+  useEffect(() => {
+    fetchEthPrice();
+  }, []);
 
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-          const currentAccount = JSON.parse(localStorage.getItem("userAccounts"))[0];
-          
-          const network = selectedNetwork.name.toLowerCase();
-          const address = currentAccount.publicAddress;
-          
-          const balanceBigNumber = await getBalance(network, address);
-          
-          console.log(`Balance in Wei (BigNumber): ${balanceBigNumber}`);
-          console.log(`Balance in Hex: ${balanceBigNumber._hex}`);
-          
-          const etherBalance = ethers.utils.formatEther(balanceBigNumber);
-          
-          console.log(`Balance in Ether: ${etherBalance}`);
-          
-          setBalance(parseFloat(etherBalance));
+        const currentAccount = JSON.parse(localStorage.getItem("userAccounts"))[0];
+        const network = selectedNetwork.name.toLowerCase();
+        const address = currentAccount.publicAddress;
+
+        const balanceBigNumber = await getBalance(network, address);
+
+        console.log(`Balance in Wei: ${balanceBigNumber.toString()}`);
+        const etherBalance = parseFloat(ethers.utils.formatEther(balanceBigNumber));
+        console.log(`Balance in ETH: ${etherBalance}`);
+        setBalance(etherBalance);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching balance:", error);
       }
     };
+
     fetchBalance();
   }, [selectedNetwork]);
-  
-  // Toggle the dropdown
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
 
-  // Handle network selection and fetch balance
+  // UI handlers
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const selectNetwork = (network) => {
     setSelectedNetwork(network);
     setIsDropdownOpen(false);
   };
 
-  const dollarEquivalent = (ethBal * ethPrice).toFixed(2)
+  const ethBal = balance.toFixed(4);
+  const dollarEquivalent = (balance * ethPrice).toFixed(2);
 
   return (
     <div className="flex flex-col items-center text-center mt-2 space-y-5">
       {/* Balance Row */}
       <div className="space-y-3 mb-6">
-        <h1 className=" text-xl">Available Balance</h1>
-        <p className="">{ethBal} {selectedNetwork.name === "Ethereum" ? "ETH" : "SepoliaETH"}</p>
+        <h1 className="text-xl">Available Balance</h1>
+        <p>{ethBal} {selectedNetwork.name === "Ethereum" ? "ETH" : "SepoliaETH"}</p>
         <div className="relative">
           <button
             onClick={toggleDropdown}
-            className="flex items-center justify-center space-x-4 rounded-full border border-primary-300 bg-white text-purple-700  w-40 py-1"
+            className="flex items-center justify-center space-x-4 rounded-full border border-primary-300 bg-white text-purple-700 w-40 py-1"
           >
             <FaRegCircleDot className="mr-2" style={{ color: selectedNetwork.color }} />
             <span>{selectedNetwork.name}</span>
@@ -148,7 +128,7 @@ const Home = () => {
           >
             <BsSendFill size={20} className="text-primary-50" />
           </button>
-          <span className="mt-1 ">Send</span>
+          <span className="mt-1">Send</span>
         </div>
         <div className="flex flex-col items-center">
           <button
@@ -157,7 +137,7 @@ const Home = () => {
           >
             <MdCallReceived size={20} className="text-primary-50" />
           </button>
-          <span className="mt-1 ">Receive</span>
+          <span className="mt-1">Receive</span>
         </div>
       </div>
 
@@ -166,8 +146,9 @@ const Home = () => {
         <div className="flex px-4">
           <h2 className="my-4">Tokens</h2>
         </div>
-        <div className={`rounded-3xl  w-[350px] h-screen  mx-auto my-4 text-center p-2 ${theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"
-          }`}>
+        <div className={`rounded-3xl w-[350px] h-screen mx-auto my-4 text-center p-2 ${
+          theme === "light" ? "bg-[#18171C] text-white" : "bg-white text-black"
+        }`}>
           <div className="flex items-center justify-between px-4">
             <div className="flex items-center py-2 gap-2">
               <span className="border-2 border-primary-900 rounded-full p-1">
@@ -175,13 +156,13 @@ const Home = () => {
               </span>
               <div className="flex flex-col items-start">
                 <h1 className="font-semibold">ETH</h1>
-                <p className="">Ethereum</p>
+                <p>Ethereum</p>
               </div>
             </div>
             <div>
               <div className="flex flex-col items-start">
                 <h1 className="font-semibold">{ethBal} ETH</h1>
-                <p className="">${dollarEquivalent}</p>
+                <p>${dollarEquivalent}</p>
               </div>
             </div>
           </div>
